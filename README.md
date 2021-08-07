@@ -4,6 +4,8 @@
 - [x] Add audio track
 - [x] Intro
 - [x] Upload video to youtube (manually) [https://www.youtube.com/watch?v=Db_Gv7XvMqg]
+- [ ] Use PGN to generate gif or video
+- [ ] Get duration based in gif
 - [ ] Generate for any pgn
 - [ ] Upload video to youtube automatically
 - [ ] Up to cloud and keeps it running for ever based in new official pgn's
