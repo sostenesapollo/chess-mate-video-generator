@@ -1,30 +1,49 @@
-import {interpolate, useCurrentFrame} from 'remotion';
-import {COLOR_1} from './config';
+import {spring, useCurrentFrame, useVideoConfig} from 'remotion';
 
-export const Subtitle: React.FC = () => {
+export const Subtitle: React.FC<{
+	subtitleText: string;
+	subtitleColor: string;
+}> = ({subtitleText, subtitleColor}) => {
+	const videoConfig = useVideoConfig();
 	const frame = useCurrentFrame();
-	const opacity = interpolate(frame, [0, 30], [0, 1]);
+	const text = subtitleText.split(' ').map((t) => ` ${t} `);
 	return (
-		<div
+		<h1
 			style={{
-				fontFamily: 'Helvetica, Arial',
+				fontFamily: 'SF Pro Text, Helvetica, Arial',
+				fontWeight: 'bold',
 				fontSize: 40,
 				textAlign: 'center',
 				position: 'absolute',
-				bottom: 140,
+				bottom: 160,
 				width: '100%',
-				opacity,
+				// top: 10
 			}}
 		>
-			Edit{' '}
-			<code
-				style={{
-					color: COLOR_1,
-				}}
-			>
-				src/Video.tsx
-			</code>{' '}
-			and save to reload.
-		</div>
+			{text.map((t, i) => {
+				return (
+					<span
+						key={t}
+						style={{
+							color: subtitleColor,
+							// background: 'black',
+							marginRight: 30,
+							transform: `scale(${spring({
+								fps: videoConfig.fps,
+								frame: frame - i * 5,
+								config: {
+									damping: 100,
+									stiffness: 200,
+									mass: 0.5,
+								},
+							})})`,
+							display: 'inline-block',
+						}}
+					>
+						{t}
+					</span>
+				);
+			})}
+		</h1>
 	);
 };

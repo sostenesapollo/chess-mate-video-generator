@@ -1,30 +1,10 @@
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
-import {Arc} from './Arc';
-import {Atom} from './Atom';
 
 export const Logo: React.FC<{
 	transitionStart: number;
 }> = ({transitionStart}) => {
 	const videoConfig = useVideoConfig();
 	const frame = useCurrentFrame();
-
-	const development = spring({
-		config: {
-			damping: 100,
-			mass: 0.5,
-		},
-		fps: videoConfig.fps,
-		frame,
-	});
-
-	const rotationDevelopment = spring({
-		config: {
-			damping: 100,
-			mass: 0.5,
-		},
-		fps: videoConfig.fps,
-		frame,
-	});
 
 	const scaleIn = spring({
 		frame,
@@ -39,21 +19,15 @@ export const Logo: React.FC<{
 			frame: frame - transitionStart,
 			fps: videoConfig.fps,
 			config: {
-				damping: 100,
-				mass: 0.5,
+				damping: 200,
+				mass: 0.2,
 			},
 		}),
 		[0, 1],
 		[0, -150]
 	);
 
-	const scale = frame < 50 ? scaleIn : 1;
-
-	const logoRotation = interpolate(
-		frame,
-		[0, videoConfig.durationInFrames],
-		[0, 360]
-	);
+	const scale = frame < 200 ? scaleIn : 1;
 
 	return (
 		<div
@@ -61,25 +35,13 @@ export const Logo: React.FC<{
 				position: 'absolute',
 				width: videoConfig.width,
 				height: videoConfig.height,
-				transform: `scale(${scale}) translateY(${translation}px) rotate(${logoRotation}deg)`,
+				alignItems: 'center',
+				justifyContent:'center',
+				display: 'flex',
+				transform: `scale(${scale}) translateY(${translation+100}px)`,
 			}}
 		>
-			<Arc
-				rotateProgress={rotationDevelopment}
-				progress={development}
-				rotation={30}
-			/>
-			<Arc
-				rotateProgress={rotationDevelopment}
-				rotation={90}
-				progress={development}
-			/>
-			<Arc
-				rotateProgress={rotationDevelopment}
-				rotation={-30}
-				progress={development}
-			/>
-			<Atom scale={rotationDevelopment} />
+			<img src='https://www.chess.com/bundles/web/images/brand/chesscom_pawn.8c9d0cf5.png' style={{width:500, height:500}}/>
 		</div>
 	);
 };
