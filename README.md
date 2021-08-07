@@ -1,12 +1,14 @@
-# Remotion video
+# Chess Mate
 
-<p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <img src="https://github.com/remotion-dev/logo/raw/main/withtitle/element-0.png">
-  </a>
-</p>
-
-Welcome to your Remotion project!
+- [x] Generate video using chess.com pgn gif generator
+- [x] Add audio track
+- [x] Intro
+- [x] Upload video to youtube (manually) [https://www.youtube.com/watch?v=Db_Gv7XvMqg]
+- [ ] Generate for any pgn
+- [ ] Upload video to youtube automatically
+- [ ] Up to cloud and keeps it running for ever based in new official pgn's
+- [ ] Add a voice in the end of the video ( winner is -> ... )
+- [ ] Get all chess matches for all time !
 
 ## Commands
 
